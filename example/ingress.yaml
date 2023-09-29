@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: index-ingress
+  namespace: develop
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - <domain>
+    secretName: index-certificate-secret
+  rules:
+  - host: <domain>
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: api-service
+            port: 
+              number: 1000
